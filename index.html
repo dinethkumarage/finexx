@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Goal Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid black;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            border: 2px solid black;
+            padding: 12px 8px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .stat-box h3 {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .stat-box p {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .circles-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid black;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .circle.active {
+            background-color: black;
+        }
+
+        .btn-container {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn:not(:disabled):hover {
+            opacity: 0.9;
+        }
+
+        /* iPhone 11 Specific Styles */
+        @media only screen 
+        and (device-width: 414px) 
+        and (device-height: 896px),
+        (max-width: 414px) {
+            body {
+                padding: 12px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-box {
+                padding: 10px 6px;
+            }
+
+            .stat-box:last-child {
+                grid-column: span 2;
+            }
+
+            .circle {
+                width: 18px;
+                height: 18px;
+            }
+
+            input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <div class="input-field">
+            <label for="goalAmount">Total Goal Amount ($):</label>
+            <input type="number" id="goalAmount" placeholder="Enter your goal (e.g., 1100000)">
+        </div>
+        <div class="input-field">
+            <label for="setAmount">Amount Per Circle ($):</label>
+            <input type="number" id="setAmount" placeholder="Enter amount per set (e.g., 500)">
+        </div>
+    </div>
+
+    <div class="btn-container">
+        <button id="generateBtn" class="btn">Generate Goals</button>
+        <button id="resetBtn" class="btn">Reset All</button>
+    </div>
+
+    <div class="stats">
+        <div class="stat-box">
+            <h3>Total Circles</h3>
+            <p id="totalCircles">0</p>
+        </div>
+        <div class="stat-box">
+            <h3>Money Made</h3>
+            <p id="moneyMade">$0</p>
+        </div>
+        <div class="stat-box">
+            <h3>Money Left</h3>
+            <p id="moneyLeft">$0</p>
+        </div>
+    </div>
+
+    <div id="circlesGrid" class="circles-grid"></div>
+
+    <script src="style.js"></script>
+</body>
+</html>
